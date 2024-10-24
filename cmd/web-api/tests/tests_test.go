@@ -17,7 +17,6 @@ import (
 	"geeks-accelerator/oss/saas-starter-kit/cmd/web-api/handlers"
 	"geeks-accelerator/oss/saas-starter-kit/internal/account"
 	"geeks-accelerator/oss/saas-starter-kit/internal/account/account_preference"
-	"geeks-accelerator/oss/saas-starter-kit/internal/checklist"
 	"geeks-accelerator/oss/saas-starter-kit/internal/platform/auth"
 	"geeks-accelerator/oss/saas-starter-kit/internal/platform/notify"
 	"geeks-accelerator/oss/saas-starter-kit/internal/platform/tests"
@@ -30,6 +29,7 @@ import (
 	"geeks-accelerator/oss/saas-starter-kit/internal/user_account/invite"
 	"geeks-accelerator/oss/saas-starter-kit/internal/user_auth"
 	"geeks-accelerator/oss/saas-starter-kit/internal/webroute"
+
 	"github.com/google/go-cmp/cmp"
 	"github.com/iancoleman/strcase"
 	"github.com/pborman/uuid"
@@ -107,7 +107,7 @@ func testMain(m *testing.M) int {
 	authRepo := user_auth.NewRepository(test.MasterDB, authenticator, usrRepo, usrAccRepo, accPrefRepo)
 	signupRepo := signup.NewRepository(test.MasterDB, usrRepo, usrAccRepo, accRepo)
 	inviteRepo := invite.NewRepository(test.MasterDB, usrRepo, usrAccRepo, accRepo, projectRoute.UserInviteAccept, notifyEmail, "6368616e676520746869732070613434")
-	prjRepo := checklist.NewRepository(test.MasterDB)
+	// prjRepo := checklist.NewRepository(test.MasterDB)
 
 	appCtx = &handlers.AppContext{
 		Log:             log,
@@ -121,7 +121,6 @@ func testMain(m *testing.M) int {
 		AuthRepo:        authRepo,
 		SignupRepo:      signupRepo,
 		InviteRepo:      inviteRepo,
-		ProjectRepo:     prjRepo,
 		Authenticator:   authenticator,
 	}
 
